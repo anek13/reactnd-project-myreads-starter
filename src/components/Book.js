@@ -13,7 +13,7 @@ class Book extends Component {
                 height: 193,
                 backgroundImage: `url(${this.props.imageLinks.thumbnail})`
                 }}></div>
-              <Changer/>
+              <Changer {...this} />
           </div>
           <div className="book-title">{this.props.title}</div>
           <div className="book-authors">{this.props.authors}</div>
