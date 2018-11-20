@@ -16,8 +16,18 @@ class Provider extends Component {
         const read = books.filter(book => book.shelf ==='read');
         this.setState({books, currentlyReading, wantToRead, read});
       },
-      moveBook: (book, shelf) => {
-        
+      moveBook: (book, newShelf, allShelves) => {
+        console.log(newShelf);
+        const newBooks = this.state.books.map(allBooks => {
+          const foundID = allShelves[newShelf].find(
+            bookID => bookID === allBooks.id
+          );
+          if (foundID) {
+            allBooks.shelf = newShelf;
+            }
+            return allBooks;
+        });
+        this.state.addBooks(newBooks);
       }
     }
   }
