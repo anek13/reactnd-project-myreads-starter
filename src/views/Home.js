@@ -14,7 +14,6 @@ class Home extends Component {
             <Shelf title="Currently Reading"/>
             <Shelf title="Want to Read"/>
             <Shelf title="Read"/>
-            <Shelf title="Don't Want to Read"/>
           </div>
         </div>
         <FAB/>
