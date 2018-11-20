@@ -11,7 +11,10 @@ class Home extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf/>
+            <Shelf title="Currently Reading"/>
+            <Shelf title="Want to Read"/>
+            <Shelf title="Read"/>
+            <Shelf title="Don't Want to Read"/>
           </div>
         </div>
         <FAB/>
