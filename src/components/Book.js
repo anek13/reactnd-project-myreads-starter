@@ -1,7 +1,18 @@
 import React, {Component} from 'react'
-import Changer from './Changer'
+import { update } from '../BooksAPI'
 
 class Book extends Component {
+  handleChange = async e => {
+    try {
+      const book = this.props;
+      const shelf = e.target.value;
+      const result = await update(book, shelf);
+      console.log(result);
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
   render() {
     return (
       <li>
@@ -13,7 +24,15 @@ class Book extends Component {
                 height: 193,
                 backgroundImage: `url(${this.props.imageLinks.thumbnail})`
                 }}></div>
-              <Changer {...this} />
+                <div className="book-shelf-changer">
+                  <select onChange={this.handleChange}>
+                    <option value="move" disabled>Move to...</option>
+                    <option value="currentlyReading">Currently Reading</option>
+                    <option value="wantToRead">Want to Read</option>
+                    <option value="read">Read</option>
+                    <option value="none">None</option>
+                  </select>
+                </div>
           </div>
           <div className="book-title">{this.props.title}</div>
           <div className="book-authors">{this.props.authors}</div>

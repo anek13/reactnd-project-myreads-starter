@@ -15,6 +15,9 @@ class Provider extends Component {
         const wantToRead = books.filter(book => book.shelf === 'wantToRead');
         const read = books.filter(book => book.shelf ==='read');
         this.setState({books, currentlyReading, wantToRead, read});
+      },
+      moveBook: (book, shelf) => {
+        
       }
     }
   }
