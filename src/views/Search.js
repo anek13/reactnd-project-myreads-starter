@@ -6,10 +6,12 @@ import Book from '../components/Book'
 class Search extends Component {
   constructor(props) {
     super(props);
+    this.queryCounter = 0;
     this.state = {
       query: '',
-      books: []
-    }
+      books: [],
+      queryNumber: 0
+    };
   }
 
   async componentDidMount() {
@@ -21,20 +23,23 @@ class Search extends Component {
     }
   }
 
-
   handleChange = async e => {
   try {
     const query = e.target.value;
     this.setState({query});
+    this.queryCounter += 1;
+    let newState = {books: [],
+                    queryNumber: this.queryCounter
+                    };
+
     if (query.trim()) {
       const results = await search(query);
-      if (results.error) {
-        this.setState({books:[]});
-      } else {
-        this.setState({books: results});
+      if (!results.error) {
+        newState.books = results;
       }
-    } else {
-      this.setState({books: []});
+    }
+    if (newState.queryNumber > this.state.queryNumber) {
+      this.setState(newState);
     }
   } catch(error) {
     console.log(error);
@@ -64,11 +69,13 @@ class Search extends Component {
                 } else {
                   book.shelf = 'none';
                 }
-                console.log(foundShelf);
                 return (
                   <Book key={book.id} {...book} moveBook={this.props.moveBook}/>
                 );
             })}
+            {this.state.books.length === 0 && (
+              <h1 style={{textAlign: 'center'}}>No results found</h1>
+            )}
           </ol>
         </div>
       </div>
