@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import FAB from '../components/FAB'
 import Shelf from '../components/Shelf'
 
+//Renders main page with book shelves and add books button.
 class Home extends Component {
 
   render() {

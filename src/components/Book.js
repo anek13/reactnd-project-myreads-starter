@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import { update } from '../BooksAPI'
 
+/*Renders UI widget displaying book information icluding:
+  book thumbnail, title and authors name; and allows moving
+  books between shelves.
+*/
 class Book extends Component {
   handleChange = async e => {
     try {

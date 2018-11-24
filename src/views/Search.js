@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {search} from '../BooksAPI'
 import Book from '../components/Book'
 
+//Renders search for books page
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -72,7 +73,7 @@ class Search extends Component {
                   <Book key={book.id} book={book} moveBook={this.props.shelves.moveBook}/>
                 );
               })
-            )} 
+            )}
 
           </ol>
         </div>
