@@ -65,5 +65,3 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Contributing
 
 This repository is one of the FEND Udacity projects. Therefore, pull requests will most likely not be accepted.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
