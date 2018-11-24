@@ -10,7 +10,8 @@ class Search extends Component {
     this.state = {
       query: '',
       foundBooks: [],
-      queryNumber: 0
+      queryNumber: 0,
+      error: false
     };
   }
 
@@ -20,7 +21,8 @@ class Search extends Component {
     this.setState({query});
     this.queryCounter += 1;
     let newState = {foundBooks: [],
-                    queryNumber: this.queryCounter
+                    queryNumber: this.queryCounter,
+                    error: false
                     };
 
     if (query.trim()) {
@@ -33,6 +35,7 @@ class Search extends Component {
       this.setState(newState);
     }
   } catch(error) {
+    this.setState({error: true});
     console.log(error);
   }
   }
@@ -50,7 +53,12 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.foundBooks.length > 0 &&
+
+            {this.state.error ? (
+              <h1 style={{textAlign: 'center'}}>Something went wrong</h1>
+            ) : (this.state.foundBooks.length === 0) ? (
+              <h1 style={{textAlign: 'center'}}>No results found</h1>
+            ) : (
               this.state.foundBooks.map(book => {
                 const foundShelf = this.props.shelves.books.find(
                   searchBook => searchBook.id === book.id
@@ -63,10 +71,9 @@ class Search extends Component {
                 return (
                   <Book key={book.id} book={book} moveBook={this.props.shelves.moveBook}/>
                 );
-            })}
-            {this.state.foundBooks.length === 0 && (
-              <h1 style={{textAlign: 'center'}}>No results found</h1>
-            )}
+              })
+            )} 
+
           </ol>
         </div>
       </div>
