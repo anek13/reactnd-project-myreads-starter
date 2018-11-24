@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {get} from '../BooksAPI'
 export const MyContext = React.createContext();
 
 
@@ -16,14 +17,19 @@ class Provider extends Component {
         const read = books.filter(book => book.shelf ==='read');
         this.setState({books, currentlyReading, wantToRead, read});
       },
-      moveBook: (book, newShelf, allShelves) => {
-        const newBooks = this.state.books.map(book => {
+      moveBook: async (movedBook, newShelf, allShelves) => {
+        let newBooks = this.state.books;
+        if (!newBooks.find(book => book.id === movedBook.id)) {
+          newBooks.push(await get(movedBook.id));
+        }
+        newBooks = newBooks.map(book => {
           book.shelf = Object.keys(allShelves).find(
             shelf => allShelves[shelf].find(
               bookID => bookID === book.id
             ));
-          return book;
-        });
+          return book.shelf ? book : null;
+        }).filter(book => book);
+
         this.state.addBooks(newBooks);
       }
     }
