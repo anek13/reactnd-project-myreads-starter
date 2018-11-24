@@ -4,7 +4,7 @@ import { update } from '../BooksAPI'
 class Book extends Component {
   handleChange = async e => {
     try {
-      const book = this.props;
+      const book = this.props.book;
       const shelf = e.target.value;
       const result = await update(book, shelf);
       this.props.moveBook(book, shelf, result);
@@ -22,10 +22,10 @@ class Book extends Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url(${this.props.imageLinks ? this.props.imageLinks.thumbnail : ''})`
+                backgroundImage: `url(${this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : ''})`
                 }}></div>
                 <div className="book-shelf-changer">
-                  <select onChange={this.handleChange} value={this.props.shelf}>
+                  <select onChange={this.handleChange} value={this.props.book.shelf}>
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
@@ -34,8 +34,8 @@ class Book extends Component {
                   </select>
                 </div>
           </div>
-          <div className="book-title">{this.props.title}</div>
-          <div className="book-authors">{this.props.authors ? this.props.authors.join(', ') : ''}</div>
+          <div className="book-title">{this.props.book.title}</div>
+          <div className="book-authors">{this.props.book.authors ? this.props.book.authors.join(', ') : ''}</div>
         </div>
       </li>
     );

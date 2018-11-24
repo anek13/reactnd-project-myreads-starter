@@ -20,7 +20,7 @@ class Provider extends Component {
       moveBook: async (movedBook, newShelf, allShelves) => {
         let newBooks = this.state.books;
         if (!newBooks.find(book => book.id === movedBook.id)) {
-          newBooks.push(await get(movedBook.id));
+          newBooks.push(movedBook);
         }
         newBooks = newBooks.map(book => {
           book.shelf = Object.keys(allShelves).find(

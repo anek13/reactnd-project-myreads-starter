@@ -70,7 +70,7 @@ class Search extends Component {
                   book.shelf = 'none';
                 }
                 return (
-                  <Book key={book.id} {...book} moveBook={this.props.shelves.moveBook}/>
+                  <Book key={book.id} book={book} moveBook={this.props.shelves.moveBook}/>
                 );
             })}
             {this.state.foundBooks.length === 0 && (
