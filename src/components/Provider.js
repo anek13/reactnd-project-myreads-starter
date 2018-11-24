@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {get} from '../BooksAPI'
 export const MyContext = React.createContext();
 
-
+//Holds the state of books distributed over a set of shelves
 class Provider extends Component {
   constructor() {
     super();

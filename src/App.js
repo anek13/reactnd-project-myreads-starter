@@ -14,12 +14,12 @@ class BooksApp extends React.Component {
           <Switch>
             <Route exact path='/' render={
                 () => (<MyContext.Consumer>
-                {context => <Home {...context}/>}
+                {context => <Home shelves={context}/>}
               </MyContext.Consumer>)
               }/>
             <Route exact path='/search' render={
                 () => (<MyContext.Consumer>
-                {context => <Search {...context}/>}
+                {context => <Search shelves={context}/>}
               </MyContext.Consumer>)
               }/>
           </Switch>

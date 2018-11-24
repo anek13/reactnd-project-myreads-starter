@@ -9,7 +9,7 @@ class Search extends Component {
     this.queryCounter = 0;
     this.state = {
       query: '',
-      books: [],
+      foundBooks: [],
       queryNumber: 0
     };
   }
@@ -17,7 +17,7 @@ class Search extends Component {
   async componentDidMount() {
     try {
       const books = await getAll();
-      this.props.addBooks(books);
+      this.props.shelves.addBooks(books);
     } catch(error) {
       console.log(error);
     }
@@ -28,14 +28,14 @@ class Search extends Component {
     const query = e.target.value;
     this.setState({query});
     this.queryCounter += 1;
-    let newState = {books: [],
+    let newState = {foundBooks: [],
                     queryNumber: this.queryCounter
                     };
 
     if (query.trim()) {
       const results = await search(query);
       if (!results.error) {
-        newState.books = results;
+        newState.foundBooks = results;
       }
     }
     if (newState.queryNumber > this.state.queryNumber) {
@@ -59,9 +59,9 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books.length > 0 &&
-              this.state.books.map(book => {
-                const foundShelf = this.props.books.find(
+            {this.state.foundBooks.length > 0 &&
+              this.state.foundBooks.map(book => {
+                const foundShelf = this.props.shelves.books.find(
                   searchBook => searchBook.id === book.id
                 );
                 if (foundShelf) {
@@ -70,10 +70,10 @@ class Search extends Component {
                   book.shelf = 'none';
                 }
                 return (
-                  <Book key={book.id} {...book} moveBook={this.props.moveBook}/>
+                  <Book key={book.id} {...book} moveBook={this.props.shelves.moveBook}/>
                 );
             })}
-            {this.state.books.length === 0 && (
+            {this.state.foundBooks.length === 0 && (
               <h1 style={{textAlign: 'center'}}>No results found</h1>
             )}
           </ol>
