@@ -7,7 +7,7 @@ class Book extends Component {
       const book = this.props;
       const shelf = e.target.value;
       const result = await update(book, shelf);
-      this.props.moveBook(book, shelf,result);
+      this.props.moveBook(book, shelf, result);
     } catch(error) {
       console.log(error);
     }
