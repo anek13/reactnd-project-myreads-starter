@@ -1,17 +1,8 @@
 import React, {Component} from 'react'
 import FAB from '../components/FAB'
 import Shelf from '../components/Shelf'
-import {getAll} from '../BooksAPI'
 
 class Home extends Component {
-  async componentDidMount() {
-    try {
-      const books = await getAll();
-      this.props.shelves.addBooks(books);
-    } catch(error) {
-      console.log(error);
-    }
-  }
 
   render() {
     return (

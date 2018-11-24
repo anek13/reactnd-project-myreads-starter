@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {search, getAll} from '../BooksAPI'
+import {search} from '../BooksAPI'
 import Book from '../components/Book'
 
 class Search extends Component {
@@ -12,15 +12,6 @@ class Search extends Component {
       foundBooks: [],
       queryNumber: 0
     };
-  }
-
-  async componentDidMount() {
-    try {
-      const books = await getAll();
-      this.props.shelves.addBooks(books);
-    } catch(error) {
-      console.log(error);
-    }
   }
 
   handleChange = async e => {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {get} from '../BooksAPI'
+import {getAll} from '../BooksAPI'
 export const MyContext = React.createContext();
 
 //Holds the state of books distributed over a set of shelves
@@ -32,6 +32,15 @@ class Provider extends Component {
 
         this.state.addBooks(newBooks);
       }
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      const books = await getAll();
+      this.state.addBooks(books);
+    } catch(error) {
+      console.log(error);
     }
   }
 
